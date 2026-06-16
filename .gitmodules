@@ -1,0 +1,12 @@
+[submodule "aterm"]
+	path = aterm
+	url = git@github.com:Aterm-labs/aterm.git
+[submodule "agent-sessions"]
+	path = agent-sessions
+	url = git@github.com:Aterm-labs/agent-sessions.git
+[submodule "aterm-pro"]
+	path = aterm-pro
+	url = git@github.com:Aterm-labs/aterm-pro.git
+[submodule "aterm-web"]
+	path = aterm-web
+	url = git@github.com:Aterm-labs/aterm-web.git
