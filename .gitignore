@@ -1,2 +1,5 @@
 .DS_Store
 *.log
+
+# Config local de Claude Code (no versionar ajustes/permiso por máquina).
+.claude/settings.local.json
