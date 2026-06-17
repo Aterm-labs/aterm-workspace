@@ -13,7 +13,7 @@ aterm-workspace/            github.com/Aterm-labs/aterm-workspace  (público)
 ├── aterm/                  core Rust: app nativa + agent-sessions-cli   (público)
 ├── agent-sessions/         extensión VS Code · Community (open-core)     (público)
 │   └── aterm/              submódulo anidado (core, para el sidecar)
-├── aterm-pro/              módulo Pro de la extensión                    (PRIVADO)
+├── agent-sessions-pro/     módulo Pro de la extensión                    (PRIVADO)
 └── aterm-web/              landing (Vite + Vue)                          (público)
 ```
 
@@ -47,7 +47,7 @@ Abre **esta carpeta** en VS Code / Claude Code (aquí están `CLAUDE.md` y
   (validación online). Features Pro: comparativa paralela, plantillas, perfiles
   de espacio de trabajo, dashboard Pro (panel con gráficas + CSV), exportar
   conversación a HTML, automatizaciones (idle + resumen diario).
-- **Split open-core**: el código Pro vive en `aterm-pro` (privado); la extensión
+- **Split open-core**: el código Pro vive en `agent-sessions-pro` (privado); la extensión
   Community en `agent-sessions`, que lo carga dinámicamente (`require("./pro")`).
 - **Web** (`aterm-web`) y **reorganización** de todo a la org `Aterm-labs` con
   este meta-repo.
@@ -71,7 +71,7 @@ Abre **esta carpeta** en VS Code / Claude Code (aquí están `CLAUDE.md` y
 
 - **Submódulos**: tras tocar un repo, commitea/pushea EN ÉL y luego actualiza el
   pin aquí (`git add <submódulo> && git commit`). `make update` trae los últimos.
-- **Build Pro**: `aterm-pro/build.sh` compila `agent-sessions` (que usa su
+- **Build Pro**: `agent-sessions-pro/build.sh` compila `agent-sessions` (que usa su
   submódulo `aterm` para el sidecar) e inyecta `out/pro/`. El `.vsix` Community
   (`agent-sessions/scripts/build-vsix.sh`) NO incluye Pro.
 - **Licencias**: offline-cacheadas; sin `out/pro` las acciones Pro muestran

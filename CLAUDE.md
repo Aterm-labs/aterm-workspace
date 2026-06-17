@@ -9,12 +9,12 @@
 > Repos:
 > - `aterm/` — core Rust (app nativa + `agent-sessions-cli`).
 > - `agent-sessions/` — extensión de VS Code (Community); trae `aterm/` anidado.
-> - `aterm-pro/` — módulo Pro (privado, open-core).
+> - `agent-sessions-pro/` — módulo Pro (privado, open-core).
 > - `aterm-web/` — landing (Vite + Vue).
 >
 > Lo que sigue es la guía histórica del proyecto (escrita cuando todo vivía en un
 > solo repo). Las rutas tipo `crates/…` están en `aterm/`; la extensión y su Pro
-> están en `agent-sessions/` y `aterm-pro/`.
+> están en `agent-sessions/` y `agent-sessions-pro/`.
 
 ## Qué es y por qué existe
 
@@ -69,7 +69,7 @@ aterm/                         # workspace Cargo
 > [`Aterm-labs/agent-sessions`](https://github.com/Aterm-labs/agent-sessions)
 > (la 2ª UI). Consume este repo como **git submodule** (`./aterm`) para compilar
 > el sidecar `agent-sessions-cli`. Su edición **Pro** (open-core) está en el repo
-> privado `aterm-pro`, y la landing en `aterm-web`. Lo que sigue describiendo la
+> privado `agent-sessions-pro`, y la landing en `aterm-web`. Lo que sigue describiendo la
 > extensión en este documento es historia/contexto; el código y su doc viva
 > están en esos repos.
 
@@ -235,15 +235,15 @@ construye el sidecar para esa plataforma y lo empaqueta en el `.vsix` bajo
 - ✅ **Split open-core (público Community ↔ privado Pro)**: el repo público es la
   **Community Edition**. El *source* de las features Pro (comparativa paralela y
   plantillas) ya **no vive en el público**: se movió al repo privado
-  `../aterm-pro`. Contrato en `src/pro-api.d.ts` (interfaces `ProApi` que el core
+  `../agent-sessions-pro`. Contrato en `src/pro-api.d.ts` (interfaces `ProApi` que el core
   expone + `ProModule` que el privado implementa); `extension.ts` carga
   dinámicamente `require("./pro")` (presente solo en la build oficial) y, si
-  falta, las acciones Pro muestran «edición Community». `aterm-pro/` tiene el
+  falta, las acciones Pro muestran «edición Community». `agent-sessions-pro/` tiene el
   módulo `pro/index.ts`, su `tsconfig` (emite plano a `out/pro/` del público) y
   `build.sh` (compila público + Pro y empaqueta el `.vsix` oficial). Topología
   hermana `../aterm` por defecto (convertible a git submodule). El history MIT
   previo conserva esas features; el split protege el desarrollo futuro.
-  **Features Pro** (en `aterm-pro/pro/index.ts`): comparativa paralela,
+  **Features Pro** (en `agent-sessions-pro/pro/index.ts`): comparativa paralela,
   plantillas, **perfiles de espacio de trabajo** (guardar/abrir conjuntos de
   sesiones), **dashboard Pro** (informe webview con gráficas + export CSV;
   presupuestos reservados para tier Team), **exportar conversación a HTML** y

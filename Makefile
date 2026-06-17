@@ -3,7 +3,7 @@
 # Repos (submódulos):
 #   aterm/           core Rust (app nativa + agent-sessions-cli)
 #   agent-sessions/  extensión de VS Code (Community) — trae su propio aterm/
-#   aterm-pro/       módulo Pro (privado, open-core)
+#   agent-sessions-pro/  módulo Pro (privado, open-core)
 #   aterm-web/       landing (Vite + Vue)
 #
 # Uso típico:
@@ -35,7 +35,7 @@ vsix:
 
 ## .vsix oficial (Community + módulo Pro).
 vsix-pro:
-	cd aterm-pro && ./build.sh $(TARGET)
+	cd agent-sessions-pro && ./build.sh $(TARGET)
 
 ## Landing en local (http://localhost:5173).
 web:

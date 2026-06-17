@@ -7,7 +7,7 @@ repos del proyecto como submódulos y centraliza setup, desarrollo y empaquetado
 aterm-workspace/
 ├── aterm/           # core Rust: app nativa + agent-sessions-cli (sidecar)
 ├── agent-sessions/  # extensión de VS Code (Community). Trae aterm/ anidado.
-├── aterm-pro/       # módulo Pro (privado, open-core)
+├── agent-sessions-pro/       # módulo Pro (privado, open-core)
 └── aterm-web/       # landing (Vite + Vue)
 ```
 
