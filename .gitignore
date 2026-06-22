@@ -3,3 +3,6 @@
 
 # Config local de Claude Code (no versionar ajustes/permiso por máquina).
 .claude/settings.local.json
+
+# Memoria local del proyecto (no se sube a git)
+CLAUDE.local.md
