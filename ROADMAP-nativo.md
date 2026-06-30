@@ -227,6 +227,14 @@ lógica ya cableada):
 Se puede abordar como un pase transversal tras tener las features cableadas, o
 por incrementos junto a cada fase. No requiere `--features pro`.
 
+**Primer pase ✅ (2026-06-30):** badge de licencia como pill coloreado, toast con
+estilo propio (superficie + borde lavanda + redondeo), ★ favorito desde la
+paleta, tags como pills redondeadas (`tag_chip`), borde de acento en tarjetas
+(verde activa / amarillo favorita), botones del hub Pro a ancho completo.
+**Pendiente del pase profundo:** sistema de tokens unificado en `theme.rs`,
+restyle integral de todos los diálogos (rejilla/botones primarios-secundarios),
+cabeceras de grupo, estados vacíos y revisión de contraste en las 10 paletas.
+
 ### Fase 5 — Pulido y release
 - Mantener verde `cargo test --workspace` (hoy 60 + 15).
 - Garantizar persistencia **byte-compatible** con la extensión
