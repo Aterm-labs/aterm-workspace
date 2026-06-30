@@ -176,10 +176,15 @@ Cablear en UI lo que el core YA soporta:
 - ✅ **Comandos del proyecto/usuario** (2026-06-30): `commands.rs` — descubre
   `.claude/commands/**` (namespaced, descripción del frontmatter) + scripts de
   package.json (PM autodetectado)/Makefile/justfile/Cargo. Botón ⚙ por proyecto.
-- ⏳ Multiselección + borrado por fecha.
-- ⏳ Paleta de acciones (todas las acciones agrupadas) / acciones rápidas.
-- ⏳ `smartLaunch`, nueva sesión en varios proyectos.
-- ⏳ Niveles de notificación + avisos idle/finish + alertas de coste.
+- ✅ **Multiselección + borrado por fecha** (2026-06-30): modo ☑ con barra de
+  acciones en lote (Abrir/Eliminar/Limpiar) + diálogo «Por fecha…».
+- ✅ **Paleta de acciones** (2026-06-30): Ctrl+Shift+P, ventana filtrable.
+- ✅ **smartLaunch + nueva sesión multi-proyecto** (2026-06-30): ✨ recomendado +
+  diálogo «Multi…».
+- ✅ **Niveles de notificación** (2026-06-30): setting NotifyLevel. Los avisos
+  idle/finish y alertas de coste se mueven a las automatizaciones Pro (Fase 4).
+
+**Fase 3 ✅ COMPLETA** (2026-06-30) — salvo idle/finish/coste (→ Fase 4 Pro).
 
 ### Fase 4 — Resto de features Pro (todas con `require_pro`)
 - Perfiles de espacio de trabajo (guardar/abrir conjuntos de sesiones).
