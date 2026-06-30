@@ -149,13 +149,17 @@ Cableado base ya disponible: `AtermApp::open_tab(ctx, argv, cwd, key)` en
 **Entregable:** `cargo run -p aterm --features pro` lanza N agentes en worktrees
 aislados desde un botón del panel; compila también sin la feature (stub).
 
-### Fase 2 — Quick wins del sidecar (Community)
+### Fase 2 — Quick wins del sidecar (Community) — EN CURSO
 Cablear en UI lo que el core YA soporta:
-- Notas + favorito (campos en `metadata.rs`; añadir al editor de sesión de
-  `sessions.rs`, donde ya están name/tags/color).
-- Plantillas (`templates-get/set/delete`): diálogo guardar/lanzar/gestionar.
-- Backup/restore de catálogo (`backup`/`restore`).
-- Iconos de sesión/proyecto; catálogo de tags (QuickPick marcable).
+- ✅ **Notas + favorito** (2026-06-30): campos `notes`/`favorite` en el editor de
+  sesión; ★ + indicador 🗒 en la fila; favoritos fijados arriba (Provider/Cascade).
+- ✅ **Plantillas** (2026-06-30): nuevo `templates.rs` (store byte-compatible con
+  el sidecar, `~/.config/aterm/templates.json`) + diálogo guardar/lanzar/borrar.
+  Lanzar inyecta el prompt al PTY tras 2,5 s (`PanelAction::OpenTemplate`).
+- ⏳ Backup/restore de catálogo (`backup`/`restore`): pendiente. El crate no lo
+  expone (solo el sidecar) → portar como módulo nativo con zip (transfer.rs ya
+  usa zip para export/import; reaprovechar).
+- ⏳ Iconos de sesión/proyecto; catálogo de tags (QuickPick marcable): pendiente.
 
 ### Fase 3 — Paridad Community restante
 - Grupos/colecciones manuales → persistir en `~/.config/aterm/groups.json`
