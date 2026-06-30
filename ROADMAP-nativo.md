@@ -186,13 +186,23 @@ Cablear en UI lo que el core YA soporta:
 
 **Fase 3 ✅ COMPLETA** (2026-06-30) — salvo idle/finish/coste (→ Fase 4 Pro).
 
-### Fase 4 — Resto de features Pro (todas con `require_pro`)
-- Perfiles de espacio de trabajo (guardar/abrir conjuntos de sesiones).
-- Dashboard Pro (egui + export CSV); resumen diario; automatizaciones idle.
-- Export conversación a HTML.
-- `portSession` / `portProject`.
-- Memory graph.
-- Configurar MCP desde UI (escribir config o copiar snippet).
+### Fase 4 — Resto de features Pro (todas con `require_pro`) — CASI COMPLETA
+Implementadas en `aterm-pro` tras ampliar el contrato `ProHost`
+(sessions/transcript/current_tabs/config_dir/write_file/open_path). Hub
+«✦ Funciones Pro» en el menú ▽ del chrome. Todas gated por `ProImpl::gate`.
+- ✅ **Perfiles de espacio de trabajo** (2026-06-30): guardar pestañas abiertas /
+  reabrirlas (`~/.config/aterm/profiles.json`).
+- ✅ **Dashboard Pro** (2026-06-30): KPIs por proveedor + export CSV.
+- ✅ **Export conversación a HTML** (2026-06-30): documento autocontenido.
+- ✅ **portSession** (2026-06-30): inyecta la transcripción como contexto en una
+  sesión nueva del proveedor destino (versión pragmática; no reescribe el
+  formato on-disk del destino).
+- ✅ **Memory graph** (2026-06-30): CLAUDE.md (imports @ + enlaces [[…]]) → informe.
+- ✅ **Configurar MCP** (2026-06-30): escribe `.mcp.json` + muestra snippet.
+- ⏳ Resumen diario / automatizaciones idle / alertas de coste: pendientes —
+  necesitan un watcher en segundo plano (egui no tiene loop propio para ello);
+  candidato a un hilo + canal hacia la app.
+- ⏳ `portProject` (portar un proyecto entero, no solo una sesión).
 
 ### Fase 4.5 — Mejora de interfaz visual (UI/UX) 🎨
 Pase de pulido visual de la app nativa. Hoy las ventanas/diálogos nuevos usan el
