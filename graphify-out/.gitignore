@@ -1,0 +1,3 @@
+# Caché incremental de graphify: transitorio y específico de cada máquina
+# (se regenera con `graphify update .`). No aporta nada versionarlo.
+cache/
