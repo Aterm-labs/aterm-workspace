@@ -94,12 +94,38 @@ Rust compila estático (no hay `require()` dinámico como en TS). Plan:
 
 ## Fases de implementación
 
-### Fase 0 — Andamiaje open-core (prerrequisito de Fase 1)
-- Crear repo privado `aterm-pro` + crate; feature flag `pro` en `aterm/Cargo.toml`.
-- `pro_api.rs` (trait + stubs Community) y `license.rs` (gate completo).
-- Verificar que compila **con y sin** `--features pro`.
+### Fase 0 — Andamiaje open-core (prerrequisito de Fase 1) ✅ HECHA (2026-06-30)
+- ✅ Crate `aterm-pro-api` (público, miembro): contrato `ProHost`/`ProModule`
+  (equivalente Rust de `pro-api.d.ts`).
+- ✅ Crate `aterm-pro` (privado, dep **opcional** tras `--features pro`, **NO**
+  miembro → ausente en Community). El repo privado `Aterm-labs/aterm-pro` queda
+  pendiente de crear; hoy vive como path local `crates/aterm-pro`.
+- ✅ `aterm/src/pro.rs` (selector `module()` real/stub + `impl ProHost`) y
+  `aterm/src/license.rs` (gate completo).
+- ✅ Compila/clippy/test **con y sin** `--features pro`; el binario Community no
+  enlaza `aterm-pro` (verificado con `cargo tree`).
+- ⚠️ **Ed25519 NO se implementó**: al portar `license.ts` se comprobó que la
+  extensión **no usa** verificación Ed25519 — es online-first con Lemon Squeezy
+  (`activate`/`validate`) + cache con grace offline de 14 días. El nativo
+  replica ese modelo exacto (misma API, mismas BUY URLs, `~/.config/aterm/
+  license.json`). Añadir Ed25519 divergiría del producto sin un emisor que firme
+  licencias; si se quiere activación 100% offline, sería trabajo nuevo a decidir.
 
-### Fase 1 — Comparativa paralela con worktrees (Pro) 🌟 EMPEZAR AQUÍ
+### Fase 1 — Comparativa paralela con worktrees (Pro) 🌟 ✅ HECHA (2026-06-30)
+Implementada en `crates/aterm-pro/src/lib.rs` (`ProImpl`):
+- `launch_parallel`: diálogo egui (elegir agentes + prompt) → un
+  `git worktree add -B agents/<id>-<stamp> <parent>/<repo>-<id>-<stamp> HEAD`
+  por agente → `open_agent` (PTY) → **inyección del prompt tras 2,5 s** sin
+  Enter (cola `deferred_writes` en `AtermApp`, paridad con la extensión).
+- `run_compare`: `git worktree list --porcelain` + `git diff --stat HEAD` +
+  `git log --oneline <base>..HEAD` → informe en ventana egui.
+- `cleanup`: `git worktree remove --force` + `git branch -D`.
+- **DECISIÓN RESUELTA** (inyección del prompt): timer diferido de 2,5 s
+  (`ProHost::inject_prompt` → `deferred_writes`, drenado en `update`). Se
+  descartó "detectar prompt listo" por frágil/por-proveedor.
+- Gate: `ProImpl::gate` consulta `ProHost::is_pro()` y, si no, abre la compra.
+
+Resto de la descripción original (referencia histórica del puerto):
 Replica de `launchParallel`/`compareWorktrees`/`cleanupWorktrees`. Referencia:
 `agent-sessions-pro/pro/index.ts` (función `launchParallel` ~L41 en adelante).
 Flujo de la extensión a replicar:
@@ -176,6 +202,12 @@ Cablear en UI lo que el core YA soporta:
 
 ## Próximo paso al retomar
 
-Arrancar por la **Fase 0 (andamiaje open-core)** seguida de la **Fase 1
-(worktrees paralelos)**. Conseguir/decidir la clave pública Ed25519 y resolver
-la decisión pendiente de inyección del prompt al PTY.
+Fases 0 y 1 ✅ hechas (2026-06-30). Siguiente: **Fase 2 (quick wins del
+sidecar: notas/favorito, plantillas, backup/restore, iconos/catálogo de tags)**.
+
+Pendientes derivados de las Fases 0/1:
+- Crear el repo privado `Aterm-labs/aterm-pro` y mover ahí `crates/aterm-pro`
+  (hoy es path local). Ajustar `build.sh` para `--features pro` oficial.
+- Probar `launch_parallel` en vivo (`cargo run -p aterm --features pro` dentro de
+  un repo git con ≥2 agentes en PATH) y afinar el timing de inyección si hace falta.
+- Si se quiere activación de licencia 100% offline, decidir Ed25519 (ver Fase 0).
