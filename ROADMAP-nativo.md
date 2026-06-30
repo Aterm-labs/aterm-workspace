@@ -231,9 +231,19 @@ por incrementos junto a cada fase. No requiere `--features pro`.
 estilo propio (superficie + borde lavanda + redondeo), ★ favorito desde la
 paleta, tags como pills redondeadas (`tag_chip`), borde de acento en tarjetas
 (verde activa / amarillo favorita), botones del hub Pro a ancho completo.
-**Pendiente del pase profundo:** sistema de tokens unificado en `theme.rs`,
-restyle integral de todos los diálogos (rejilla/botones primarios-secundarios),
-cabeceras de grupo, estados vacíos y revisión de contraste en las 10 paletas.
+
+**Pase profundo ✅ (2026-06-30):**
+- Sistema de tokens en `theme.rs`: `RADIUS`/`GAP`, redondeo 8px, **sombras
+  suaves** en ventanas/popups (escaladas por luminancia), márgenes de
+  ventana/menú consistentes → mejora **todas** las ventanas, incluidas las de
+  `aterm-pro`, vía el `Style` global.
+- Helpers `theme::heading` / `theme::muted`, aplicados en Ajustes (títulos de
+  categoría unificados) y hints del panel.
+- Estado vacío del panel central rediseñado (marca + guía + atajo).
+
+**Pendiente (long-tail, opcional):** afinado fino de contraste por-paleta en las
+10 paletas y micro-pulido de cada diálogo Pro (rejillas/botones primario-
+secundario). El grueso del look ya es coherente vía tokens globales.
 
 ### Fase 5 — Pulido y release
 - Mantener verde `cargo test --workspace` (hoy 60 + 15).
