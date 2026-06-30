@@ -162,20 +162,24 @@ Cablear en UI lo que el core YA soporta:
   catálogo» en el panel; restore recarga el catálogo en memoria.
 - ✅ **Catálogo de tags** (2026-06-30): en el editor de sesión, chips marcables
   con todas las tags en uso (`metadata.all_tags()`) que se alternan en el campo.
-- ⏳ Iconos de sesión/proyecto (emoji): pendiente (item menor). En la extensión
-  viven en `globalState`; en nativo irían a un fichero propio bajo
-  `~/.config/aterm/` (no tocar la metadata compartida).
+- ✅ **Iconos de sesión/proyecto** (2026-06-30): nuevo `icons.rs` (store global
+  en `~/.config/aterm/icons.json`, NO toca la metadata compartida). Campo «Icono»
+  en el editor de sesión y de proyecto; emoji mostrado en fila y cabecera.
 
-### Fase 3 — Paridad Community restante
-- Grupos/colecciones manuales → persistir en `~/.config/aterm/groups.json`
-  (NO tocar la metadata compartida con la extensión).
-- Comandos del proyecto/usuario: descubrir `.claude/commands/**` (namespaced,
-  descripción del frontmatter) + scripts de package.json (PM autodetectado)/
-  Makefile/justfile/Cargo.
-- Multiselección + borrado por fecha.
-- Paleta de acciones (todas las acciones agrupadas) / acciones rápidas.
-- `smartLaunch`, nueva sesión en varios proyectos.
-- Niveles de notificación + avisos idle/finish + alertas de coste.
+**Fase 2 ✅ COMPLETA** (2026-06-30).
+
+### Fase 3 — Paridad Community restante — EN CURSO
+- ✅ **Grupos/colecciones manuales** (2026-06-30): `groups.rs`
+  (`~/.config/aterm/groups.json`, NO toca metadata compartida) + vista
+  `GroupMode::Group` (crear/eliminar grupos, buckets con miembros) + asignación
+  por checkboxes en el editor de sesión.
+- ✅ **Comandos del proyecto/usuario** (2026-06-30): `commands.rs` — descubre
+  `.claude/commands/**` (namespaced, descripción del frontmatter) + scripts de
+  package.json (PM autodetectado)/Makefile/justfile/Cargo. Botón ⚙ por proyecto.
+- ⏳ Multiselección + borrado por fecha.
+- ⏳ Paleta de acciones (todas las acciones agrupadas) / acciones rápidas.
+- ⏳ `smartLaunch`, nueva sesión en varios proyectos.
+- ⏳ Niveles de notificación + avisos idle/finish + alertas de coste.
 
 ### Fase 4 — Resto de features Pro (todas con `require_pro`)
 - Perfiles de espacio de trabajo (guardar/abrir conjuntos de sesiones).
