@@ -156,10 +156,15 @@ Cablear en UI lo que el core YA soporta:
 - ✅ **Plantillas** (2026-06-30): nuevo `templates.rs` (store byte-compatible con
   el sidecar, `~/.config/aterm/templates.json`) + diálogo guardar/lanzar/borrar.
   Lanzar inyecta el prompt al PTY tras 2,5 s (`PanelAction::OpenTemplate`).
-- ⏳ Backup/restore de catálogo (`backup`/`restore`): pendiente. El crate no lo
-  expone (solo el sidecar) → portar como módulo nativo con zip (transfer.rs ya
-  usa zip para export/import; reaprovechar).
-- ⏳ Iconos de sesión/proyecto; catálogo de tags (QuickPick marcable): pendiente.
+- ✅ **Backup/restore de catálogo** (2026-06-30): nuevo `backup.rs` (zip
+  byte-compatible con el sidecar: manifest `aterm/catalog-backup` v1 +
+  `config/{session-metadata,project-names,templates}.json`). Sección «Backup del
+  catálogo» en el panel; restore recarga el catálogo en memoria.
+- ✅ **Catálogo de tags** (2026-06-30): en el editor de sesión, chips marcables
+  con todas las tags en uso (`metadata.all_tags()`) que se alternan en el campo.
+- ⏳ Iconos de sesión/proyecto (emoji): pendiente (item menor). En la extensión
+  viven en `globalState`; en nativo irían a un fichero propio bajo
+  `~/.config/aterm/` (no tocar la metadata compartida).
 
 ### Fase 3 — Paridad Community restante
 - Grupos/colecciones manuales → persistir en `~/.config/aterm/groups.json`
@@ -179,6 +184,29 @@ Cablear en UI lo que el core YA soporta:
 - `portSession` / `portProject`.
 - Memory graph.
 - Configurar MCP desde UI (escribir config o copiar snippet).
+
+### Fase 4.5 — Mejora de interfaz visual (UI/UX) 🎨
+Pase de pulido visual de la app nativa. Hoy las ventanas/diálogos nuevos usan el
+look por defecto de egui (funcional pero plano). Objetivo: una UI coherente,
+densa y con marca, a la altura del terminal. Trabajo (incremental, sin tocar la
+lógica ya cableada):
+- **Sistema de diseño**: espaciados, radios, tipografía y paleta unificados
+  derivados de `theme.rs` (las 10 paletas); tokens reutilizables en vez de
+  literales sueltos (p. ej. el `★` amarillo hardcoded → color de la paleta).
+- **Barra superior / chrome**: agrupar acciones con separadores e iconos
+  consistentes; el botón ⚡ y el indicador de licencia con estilo de "pill".
+- **Panel de sesiones**: refinar las tarjetas (jerarquía visual, hover, estados
+  activo/favorito), chips de tag con color, cabeceras de grupo más claras.
+- **Diálogos Pro y de licencia**: layout con rejilla consistente, botones
+  primarios/secundarios diferenciados, estados vacíos con guía.
+- **Toast/Informe**: estilo propio (no `Frame::popup` plano), animación de
+  entrada/salida y auto-fade.
+- **Iconografía**: revisar glifos (fuentes ya instaladas) y fallbacks; evitar
+  cuadros vacíos por glifos ausentes.
+- **Accesibilidad**: contraste suficiente en las 10 paletas (claras y oscuras),
+  tamaños de toque, foco visible.
+Se puede abordar como un pase transversal tras tener las features cableadas, o
+por incrementos junto a cada fase. No requiere `--features pro`.
 
 ### Fase 5 — Pulido y release
 - Mantener verde `cargo test --workspace` (hoy 60 + 15).
